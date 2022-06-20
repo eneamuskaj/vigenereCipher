@@ -1,41 +1,45 @@
 body {
+  background-color: #ffffff;
+  background-image: radial-gradient(#4caf50 0.9px, #000000 0.9px);
+  background-size: 18px 18px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-color: #e7e7e7;
-  opacity: 0.9;
-  background: radial-gradient(
-      circle,
-      transparent 20%,
-      #e7e7e7 20%,
-      #e7e7e7 80%,
-      transparent 80%,
-      transparent
-    ),
-    radial-gradient(
-        circle,
-        transparent 20%,
-        #e7e7e7 20%,
-        #e7e7e7 80%,
-        transparent 80%,
-        transparent
-      )
-      40px 40px,
-    linear-gradient(#ffb1b1 3.2px, transparent 3.2px) 0 -1.6px,
-    linear-gradient(90deg, #ffb1b1 3.2px, #e7e7e7 3.2px) -1.6px 0;
-  background-size: 80px 80px, 80px 80px, 40px 40px, 40px 40px;
-  height: 95vh;
 }
+#image-container {
+  position: fixed;
+  height: 80px;
+  width: 80px;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#gitImage {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #b40000;
+  border-radius: 50%;
+  width: 50%;
+  padding: 10px;
+}
+#gitImage:hover {
+  padding: 20px;
+  background-color: #4caf50;
+}
+
 #main-div {
   box-sizing: border-box;
   border-radius: 5px;
   background-color: #f2f2f2;
-  padding: 20px;
-  margin: 40px;
+  padding: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 #description {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  text-align: justify;
   padding-top: 3%;
   padding-left: 20%;
   padding-right: 20%;
@@ -85,7 +89,8 @@ input[type="submit"]:hover {
   background-color: #45a049;
 }
 
-div {
+#heading {
+  text-align: center;
 }
 
 #submit1 {
