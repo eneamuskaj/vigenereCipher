@@ -13,191 +13,76 @@
         <img id="gitImage" src="./GitHub-Mark-64px.png" alt="" />
       </a>
     </div>
-    <div id="main-div">
-      <div id="description">
-        <h2 id="heading">Vigenère Cipher</h2>
-        <p>
-          The Vigenère cipher is a classic cipher originally developed by
-          Italian cryptographer Giovan Battista Bellaso and published in 1553.
-          It is named after a later French cryptographer Blaise de Vigenère, who
-          had developed a stronger autokey cipher (a cipher that incorporates
-          the message of the text into the key). The cipher is easy to
-          understand and implement, but survived three centuries of attempts to
-          break it, earning it the nickname "le chiffre indéchiffrable" or "the
-          indecipherable cipher."
-        </p>
-        <p>
-          Assume the key is repeated for the length of the text, character by
-          character. Note that this implementation repeats the key over
-          characters only if they are part of the alphabet and whitespaces. The
-          shift is derived by applying a Caesar shift to a character with the
-          corresponding index of the key in the alphabet.
-        </p>
-      </div>
-      <div id="main-container">
-        <div id="encoder">
-          <h1>Vigenere Cipher Encoding</h1>
-          <form id="form1">
-            <label for="text"></label>
-            <input
-              type="text"
-              id="text"
-              placeholder="Text to be encoded:"
-              value=""
-            /><br />
-            <label for="password"></label>
-            <input
-              type="text"
-              id="password"
-              placeholder="Password:"
-              value=""
-            /><br />
-            <input id="submit1" type="submit" value="Encrypt!" />
-          </form>
-          <h3>Result:</h3>
-          <h3 id="result1"></h3>
+    <div id="div">
+      <div id="main-div">
+        <div id="description">
+          <h2 id="heading">Vigenère Cipher</h2>
+          <p>
+            The Vigenère cipher is a classic cipher originally developed by
+            Italian cryptographer Giovan Battista Bellaso and published in 1553.
+            It is named after a later French cryptographer Blaise de Vigenère,
+            who had developed a stronger autokey cipher (a cipher that
+            incorporates the message of the text into the key). The cipher is
+            easy to understand and implement, but survived three centuries of
+            attempts to break it, earning it the nickname "le chiffre
+            indéchiffrable" or "the indecipherable cipher."
+          </p>
+          <p>
+            Assume the key is repeated for the length of the text, character by
+            character. Note that this implementation repeats the key over
+            characters only if they are part of the alphabet and whitespaces.
+            The shift is derived by applying a Caesar shift to a character with
+            the corresponding index of the key in the alphabet.
+          </p>
         </div>
-        <div id="decoder">
-          <h1>Vigenere Cipher Decoding</h1>
-          <form id="form2">
-            <label for="text2"></label>
-            <input
-              type="text"
-              id="text2"
-              placeholder="Text to be decoded:"
-              value=""
-            /><br />
-            <label for="password2"></label>
-            <input
-              type="text"
-              id="password2"
-              placeholder="Password: "
-              value=""
-            /><br />
-            <input id="submit2" type="submit" value="Decrypt!" />
-          </form>
-          <h3>Result:</h3>
-          <h3 id="result2"></h3>
+        <div id="main-container">
+          <div id="encoder">
+            <h3>Vigenere Cipher Encoding</h3>
+            <form id="form1">
+              <label for="text"></label>
+              <input
+                type="text"
+                id="text"
+                placeholder="Text to be encoded:"
+                value=""
+              /><br />
+              <label for="password"></label>
+              <input
+                type="text"
+                id="password"
+                placeholder="Password:"
+                value=""
+              /><br />
+              <input id="submit1" type="submit" value="Encrypt!" />
+            </form>
+            <h3>Result:</h3>
+            <h3 id="result1"></h3>
+          </div>
+          <div id="decoder">
+            <h3>Vigenere Cipher Decoding</h3>
+            <form id="form2">
+              <label for="text2"></label>
+              <input
+                type="text"
+                id="text2"
+                placeholder="Text to be decoded:"
+                value=""
+              /><br />
+              <label for="password2"></label>
+              <input
+                type="text"
+                id="password2"
+                placeholder="Password: "
+                value=""
+              /><br />
+              <input id="submit2" type="submit" value="Decrypt!" />
+            </form>
+            <h3>Result:</h3>
+            <h3 id="result2"></h3>
+          </div>
         </div>
       </div>
     </div>
-
-    <script>
-      //event listeners
-      var form1 = document.getElementById("form1");
-      form1.addEventListener("submit", (event) => {
-        event.preventDefault();
-        let textValue = document.getElementById("text").value;
-        let passwordValue = document.getElementById("password").value;
-        vigenereCipherEncoder(passwordValue, textValue);
-      });
-      var form2 = document.getElementById("form2");
-      form2.addEventListener("submit", (event) => {
-        event.preventDefault();
-        let textValue2 = document.getElementById("text2").value;
-        let passwordValue2 = document.getElementById("password2").value;
-        vigenereCipherDecoder(passwordValue2, textValue2);
-      });
-
-      //encoder function
-
-      function vigenereCipherEncoder(key, abc) {
-        inputArray = abc.split("");
-        passwordArray = key.split("");
-        let filledPasswordAarray = [];
-
-        while (filledPasswordAarray.length < inputArray.length) {
-          for (let i = 0; i < passwordArray.length; i++) {
-            filledPasswordAarray.push(passwordArray[i]);
-          }
-        }
-        let alphabet = "abcdefghijklmnopqrstuvwxyz";
-        let alphabetArray = alphabet.split("");
-        let shifterArray = [];
-
-        for (let i = 0; i < filledPasswordAarray.length; i++) {
-          for (let j = 0; j < alphabetArray.length; j++) {
-            if (filledPasswordAarray[i] == alphabetArray[j]) {
-              shifterArray.push(j);
-            }
-          }
-        }
-        console.log(
-          "shifter array: " + shifterArray,
-          "filledPasswordAarray: " + filledPasswordAarray
-        );
-
-        let encoded = [];
-        for (let i = 0; i < inputArray.length; i++) {
-          if (inputArray[i] === " ") {
-            encoded.push(" ");
-          }
-          for (let j = 0; j < alphabetArray.length; j++) {
-            if (inputArray[i] == alphabetArray[j]) {
-              if (shifterArray[i] + j > 25) {
-                encoded.push(alphabetArray[shifterArray[i] + j - 26]);
-              } else {
-                encoded.push(alphabetArray[shifterArray[i] + j]);
-              }
-            }
-          }
-        }
-        console.log("inputArray: " + inputArray, "encoded:" + encoded);
-        let result = encoded.join("");
-        console.log(result);
-        document.getElementById("result1").innerHTML = result;
-      }
-
-      //decoder function
-
-      function vigenereCipherDecoder(key, abc) {
-        {
-          inputArray = abc.split("");
-          passwordArray = key.split("");
-          let filledPasswordAarray = [];
-
-          while (filledPasswordAarray.length < inputArray.length) {
-            for (let i = 0; i < passwordArray.length; i++) {
-              filledPasswordAarray.push(passwordArray[i]);
-            }
-          }
-          let alphabet = "abcdefghijklmnopqrstuvwxyz";
-          let alphabetArray = alphabet.split("");
-          let shifterArray = [];
-
-          for (let i = 0; i < filledPasswordAarray.length; i++) {
-            for (let j = 0; j < alphabetArray.length; j++) {
-              if (filledPasswordAarray[i] == alphabetArray[j]) {
-                shifterArray.push(j);
-              }
-            }
-          }
-
-          let dencoded = [];
-          for (let i = 0; i < inputArray.length; i++) {
-            if (inputArray[i] === " ") {
-              dencoded.push(" ");
-            }
-            for (let j = 0; j < alphabetArray.length; j++) {
-              if (inputArray[i] == alphabetArray[j]) {
-                if (j - shifterArray[i] === 0) {
-                  dencoded.push("a");
-                }
-                if (j - shifterArray[i] < 1) {
-                  dencoded.push(alphabetArray[j - shifterArray[i] + 26]);
-                } else {
-                  dencoded.push(alphabetArray[j - shifterArray[i]]);
-                }
-              } else if (inputArray[i] == " ") {
-                dencoded.push(" ");
-              }
-            }
-          }
-          let result2 = dencoded.join("");
-          console.log(result2);
-          document.getElementById("result2").innerHTML = result2;
-        }
-      }
-    </script>
+    <script src="./index.js"></script>
   </body>
 </html>

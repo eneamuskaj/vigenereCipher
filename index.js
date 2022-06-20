@@ -1,42 +1,73 @@
-function vigenereCipher(key, abc) {
-  this.encode = function (str) {
-    inputArray = str.split("");
-    passwordArray = key.split("");
-    let filledPasswordAarray = [];
+//event listeners
+var form1 = document.getElementById("form1");
+form1.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let textValue = document.getElementById("text").value;
+  let passwordValue = document.getElementById("password").value;
+  vigenereCipherEncoder(passwordValue, textValue);
+});
+var form2 = document.getElementById("form2");
+form2.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let textValue2 = document.getElementById("text2").value;
+  let passwordValue2 = document.getElementById("password2").value;
+  vigenereCipherDecoder(passwordValue2, textValue2);
+});
 
-    while (filledPasswordAarray.length < inputArray.length) {
-      for (let i = 0; i < passwordArray.length; i++) {
-        filledPasswordAarray.push(passwordArray[i]);
+//encoder function
+
+function vigenereCipherEncoder(key, abc) {
+  inputArray = abc.split("");
+  passwordArray = key.split("");
+  let filledPasswordAarray = [];
+
+  while (filledPasswordAarray.length < inputArray.length) {
+    for (let i = 0; i < passwordArray.length; i++) {
+      filledPasswordAarray.push(passwordArray[i]);
+    }
+  }
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
+  let alphabetArray = alphabet.split("");
+  let shifterArray = [];
+
+  for (let i = 0; i < filledPasswordAarray.length; i++) {
+    for (let j = 0; j < alphabetArray.length; j++) {
+      if (filledPasswordAarray[i] == alphabetArray[j]) {
+        shifterArray.push(j);
       }
     }
-    let alphabet = "abcdefghijklmnopqrstuvwxyz";
-    let alphabetArray = alphabet.split("");
-    let shifterArray = [];
+  }
+  console.log(
+    "shifter array: " + shifterArray,
+    "filledPasswordAarray: " + filledPasswordAarray
+  );
 
-    for (let i = 0; i < filledPasswordAarray.length; i++) {
-      for (let j = 0; j < alphabetArray.length; j++) {
-        if (filledPasswordAarray[i] == alphabetArray[j]) {
-          shifterArray.push(j);
+  let encoded = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    if (inputArray[i] === " ") {
+      encoded.push(" ");
+    }
+    for (let j = 0; j < alphabetArray.length; j++) {
+      if (inputArray[i] == alphabetArray[j]) {
+        if (shifterArray[i] + j > 25) {
+          encoded.push(alphabetArray[shifterArray[i] + j - 26]);
+        } else {
+          encoded.push(alphabetArray[shifterArray[i] + j]);
         }
       }
     }
+  }
+  console.log("inputArray: " + inputArray, "encoded:" + encoded);
+  let result = encoded.join("");
+  console.log(result);
+  document.getElementById("result1").innerHTML = result;
+}
 
-    let encoded = [];
-    for (let i = 0; i < inputArray.length; i++) {
-      for (let j = 0; j < alphabetArray.length; j++) {
-        if (inputArray[i] == alphabetArray[j]) {
-          if (shifterArray[i] + j > 26) {
-            encoded.push(alphabetArray[shifterArray[i] + j - 26]);
-          } else {
-            encoded.push(alphabetArray[shifterArray[i] + j]);
-          }
-        }
-      }
-    }
-    console.log(encoded.join(""));
-  };
-  this.decode = function (str) {
-    inputArray = str.split("");
+//decoder function
+
+function vigenereCipherDecoder(key, abc) {
+  {
+    inputArray = abc.split("");
     passwordArray = key.split("");
     let filledPasswordAarray = [];
 
@@ -59,6 +90,9 @@ function vigenereCipher(key, abc) {
 
     let dencoded = [];
     for (let i = 0; i < inputArray.length; i++) {
+      if (inputArray[i] === " ") {
+        dencoded.push(" ");
+      }
       for (let j = 0; j < alphabetArray.length; j++) {
         if (inputArray[i] == alphabetArray[j]) {
           if (j - shifterArray[i] === 0) {
@@ -69,17 +103,13 @@ function vigenereCipher(key, abc) {
           } else {
             dencoded.push(alphabetArray[j - shifterArray[i]]);
           }
+        } else if (inputArray[i] == " ") {
+          dencoded.push(" ");
         }
       }
     }
-    console.log(dencoded.join(""));
-  };
+    let result2 = dencoded.join("");
+    console.log(result2);
+    document.getElementById("result2").innerHTML = result2;
+  }
 }
-
-var abc, key;
-abc = "abcdefghijklmnopqrstuvwxyz";
-key = "password";
-c = new vigenereCipher(key, abc);
-
-c.encode("codewars");
-c.decode("rovwsoiv");

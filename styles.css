@@ -3,6 +3,13 @@ body {
   background-image: radial-gradient(#4caf50 0.9px, #000000 0.9px);
   background-size: 18px 18px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+}
+#div {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #image-container {
   position: fixed;
@@ -31,7 +38,6 @@ body {
   box-sizing: border-box;
   border-radius: 5px;
   background-color: #f2f2f2;
-  padding: 10px;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -48,19 +54,26 @@ body {
 #main-container {
   display: flex;
   justify-content: center;
-  gap: 10%;
+  gap: 5%;
+  align-items: flex-start;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 #encoder {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  min-width: 50%;
+  max-width: 50%;
 }
 #decoder {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  min-width: 50%;
+  max-width: 50%;
 }
 
 input[type="text"],
