@@ -133,4 +133,25 @@ input[type="submit"]:hover {
   #description {
     padding-top: 10%;
   }
+  body {
+    height: 100%;
+  }
+
+  #image-container {
+    height: 50px;
+    width: 50px;
+  }
+  #main-container {
+    flex-direction: column;
+  }
+
+  #encoder {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  #decoder {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
