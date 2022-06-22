@@ -130,4 +130,7 @@ input[type="submit"]:hover {
     padding-left: 5%;
     padding-right: 5%;
   }
+  #description {
+    padding-top: 10%;
+  }
 }
